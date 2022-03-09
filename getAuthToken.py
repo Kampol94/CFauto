@@ -30,7 +30,7 @@ def getAuthToken(login, password):
         raise
     try:
         token = s.cookies['.ASPXAUTH_Cms']
-    except Exception as e:
+    except Exception:
         print('Getting token failed')
         raise
 

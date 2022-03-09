@@ -25,4 +25,9 @@ def bookTraining(id, token):
 
     response = requests.request("POST", url, headers=headers, data=payload)
     print(response.text)
-    return json.loads(response.text)['Success']
+    try:
+        result = json.loads(response.text)['Success']
+    except Exception:
+        print('Booking failed')
+        raise
+    return result
