@@ -1,11 +1,11 @@
 import requests
 import json
 
-def bookTraining(id, token):
+def bookTraining(id, token, memberId):
 
-    url = "https://centrumfitnesslea-krakow.cms.efitness.com.pl/Schedule/RegisterForClass"
+    url = "https://crossfit-lea.cms.efitness.com.pl/Schedule/RegisterForClass"
 
-    payload=f"id={id}&memberID=5791062&promoCodeID=&promoCode="
+    payload=f"id={id}&memberID={memberId}&promoCodeID=&promoCode="
     headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0',
     'Accept': '*/*',
@@ -13,10 +13,10 @@ def bookTraining(id, token):
     'Accept-Encoding': 'gzip, deflate, br',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     'X-Requested-With': 'XMLHttpRequest',
-    'Origin': 'https://centrumfitnesslea-krakow.cms.efitness.com.pl',
+    'Origin': 'https://crossfit-lea.cms.efitness.com.pl',
     'DNT': '1',
     'Connection': 'keep-alive',
-    'Referer': 'https://centrumfitnesslea-krakow.cms.efitness.com.pl/kalendarz-zajec',
+    'Referer': 'https://crossfit-lea.cms.efitness.com.pl/kalendarz-zajec',
     'Cookie': f'.ASPXAUTH_Cms={token};',
     'Sec-Fetch-Dest': 'empty',
     'Sec-Fetch-Mode': 'cors',
@@ -28,6 +28,6 @@ def bookTraining(id, token):
     try:
         result = json.loads(response.text)['Success']
     except Exception:
-        print('Booking failed')
+        print('/n Booking failed')
         raise
     return result
