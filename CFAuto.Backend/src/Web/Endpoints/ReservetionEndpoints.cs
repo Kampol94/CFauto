@@ -19,28 +19,38 @@ public static class ReservetionEndpoints
 
     private static async Task<IResult> CreateReservationAsync(IPublishEndpoint publishEndpoint, CreateReservationJobRequest request)
     {
+        var uuid = Guid.NewGuid();
         await publishEndpoint.Publish<CreateReservationJob>(new
         {
+            ReservationId = uuid,
             request.TrainingId,
             request.MemberId,
             request.UserToken
         });
-        return Results.Accepted();
+        return Results.Accepted(uuid.ToString());
     }
 
-    private static async Task<IResult> GetReservationStatusAsync(Guid reservationId, IRequestClient<GetReservationStatus> client)
+    private static async Task<IResult> GetReservationStatusAsync(Guid reservationId, IRequestClient<CheckReservationStatus> client)
     {
-        var response = await client.GetResponse<ReservationStatus, string>(new { ReservationId = reservationId });
+        var (status, notFound) = await client.GetResponse<Contracts.ReservationStatus, NotFound>(new CheckReservationStatus { ReservationId = reservationId });
 
-        return response switch
-        {
-            (Response<ReservationStatus> reservationStatusResponse, _) => HandleSuccessResponse(reservationStatusResponse),
-            (_, Response<string> errorResponse) => HandleErrorResponse(errorResponse),
-            _ => Results.StatusCode(StatusCodes.Status500InternalServerError)
-        };
+        if (status.IsCompletedSuccessfully)
+            {
+                var response = await status;
+                return Results.Ok(response.Message);
+            }
+
+        var notFoundResponse = await notFound;
+        return Results.NotFound(notFoundResponse.Message);
+        // return response switch
+        // {
+        //     (Response<ReservationStatus> reservationStatusResponse, _) => HandleSuccessResponse(reservationStatusResponse),
+        //     (_, Response<NotFound> errorResponse) => HandleErrorResponse(errorResponse),
+        //     _ => Results.StatusCode(StatusCodes.Status500InternalServerError)
+        // };
     }
 
-    private static IResult HandleSuccessResponse(Response<ReservationStatus> reservationStatusResponse)
+    private static IResult HandleSuccessResponse(Response<ReservationStatusResponse> reservationStatusResponse)
     {
         return Results.Ok(new
         {
@@ -48,7 +58,7 @@ public static class ReservetionEndpoints
         });
     }
 
-    private static IResult HandleErrorResponse(Response<string> errorResponse)
+    private static IResult HandleErrorResponse(Response<NotFound> errorResponse)
     {
         return Results.BadRequest(new { Error = errorResponse.Message });
     }
@@ -77,7 +87,7 @@ public static class ReservetionEndpoints
         public Guid ReservationId { get; set; }
     }
 
-    public class ReservationStatus
+    public class ReservationStatusResponse
     {
         [JsonPropertyName("currentState")]
         public string CurrentState { get; set; } = default!;

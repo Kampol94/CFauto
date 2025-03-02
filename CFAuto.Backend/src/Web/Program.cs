@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Contracts;
 using MassTransit;
 using Web.Endpoints;
 using static Web.Endpoints.ReservetionEndpoints;
@@ -31,7 +32,7 @@ builder.Services.AddMassTransit(x =>
         });
     });
 
-    x.AddRequestClient<GetReservationStatus>();
+    //x.AddRequestClient<CheckReservationStatus>();
 });
 
 var app = builder.Build();
@@ -46,9 +47,13 @@ app.Run();
 [JsonSerializable(typeof(CreateReservationJobRequest))]
 [JsonSerializable(typeof(CreateReservationJobResponse))]
 [JsonSerializable(typeof(GetReservationStatus))]
-[JsonSerializable(typeof(ReservationStatus))]
-[JsonSerializable(typeof(Response<ReservationStatus>))]
+[JsonSerializable(typeof(ReservetionEndpoints.ReservationStatusResponse))]
+[JsonSerializable(typeof(Contracts.CheckReservationStatus))]
+[JsonSerializable(typeof(Contracts.NotFound))]
+[JsonSerializable(typeof(Contracts.ReservationStatus))]
+[JsonSerializable(typeof(Response<ReservetionEndpoints.ReservationStatusResponse>))]
 [JsonSerializable(typeof(List<string>))] 
+[JsonSerializable(typeof(CreateReservationJob))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {
 }

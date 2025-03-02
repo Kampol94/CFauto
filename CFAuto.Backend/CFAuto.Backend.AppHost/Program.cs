@@ -1,7 +1,8 @@
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var cache = builder.AddRedis("redis");
+var cache = builder.AddRedis("redis")
+                    .WithRedisCommander();
 
 var rabbitmq = builder.AddRabbitMQ("rabbitmq")
                       .WithLifetime(ContainerLifetime.Persistent)

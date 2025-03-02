@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 ###
 
-GET {{Web_HostAddress}}/api/reservationStatus/9a5639ba-a59e-42a8-892b-30bb40b6334e
+GET {{Web_HostAddress}}/api/reservationStatus/550f6115-4a56-4adf-a221-774dadcec38c
 Accept: application/json
 
 ###

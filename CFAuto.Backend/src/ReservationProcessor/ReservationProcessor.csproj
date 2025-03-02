@@ -1,17 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-WorkerService1-85ca51b4-8302-4731-8514-4c91aec2706c</UserSecretsId>
+    <UserSecretsId>dotnet-ReservationProcessor-4e4745fd-51b8-428d-8293-2584505f7132</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MassTransit" Version="8.3.6" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.6" />
-    <PackageReference Include="MassTransit.Redis" Version="8.3.6" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
