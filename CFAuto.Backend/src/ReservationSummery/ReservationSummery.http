@@ -1,0 +1,6 @@
+@ReservationSummery_HostAddress = http://localhost:5156
+
+GET {{ReservationSummery_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

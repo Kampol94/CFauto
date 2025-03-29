@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<CreateReservationJobConsumer>();
+    x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(true));
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration.GetConnectionString("rabbitmq")!);

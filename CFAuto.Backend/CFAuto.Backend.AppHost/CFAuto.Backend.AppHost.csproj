@@ -12,12 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\ReservationProcessor\ReservationProcessor.csproj" />
+    <ProjectReference Include="..\src\ReservationSummery\ReservationSummery.csproj" />
     <ProjectReference Include="..\src\Web\Web.csproj" />
-    <ProjectReference Include="..\src\WorkerService1\WorkerService1.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.Redis" Version="9.0.0" />
     <PackageReference Include="MassTransit" Version="8.3.6" />

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "src\Contracts\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationProcessor", "src\ReservationProcessor\ReservationProcessor.csproj", "{501B7703-E2F6-4A5B-A54B-D8F6895654B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationSummery", "src\ReservationSummery\ReservationSummery.csproj", "{A2C75693-F340-49FF-BCF5-1CA53581B565}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{501B7703-E2F6-4A5B-A54B-D8F6895654B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{501B7703-E2F6-4A5B-A54B-D8F6895654B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{501B7703-E2F6-4A5B-A54B-D8F6895654B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C75693-F340-49FF-BCF5-1CA53581B565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C75693-F340-49FF-BCF5-1CA53581B565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C75693-F340-49FF-BCF5-1CA53581B565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C75693-F340-49FF-BCF5-1CA53581B565}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +65,6 @@ Global
 		{B092A016-C042-4445-BE41-CCAE7F52CBB8} = {74ED010E-D314-4A1A-AA08-AFD0DAB88B86}
 		{33B65044-BBD9-439F-AF14-8A7B39989AF2} = {74ED010E-D314-4A1A-AA08-AFD0DAB88B86}
 		{501B7703-E2F6-4A5B-A54B-D8F6895654B4} = {74ED010E-D314-4A1A-AA08-AFD0DAB88B86}
+		{A2C75693-F340-49FF-BCF5-1CA53581B565} = {74ED010E-D314-4A1A-AA08-AFD0DAB88B86}
 	EndGlobalSection
 EndGlobal

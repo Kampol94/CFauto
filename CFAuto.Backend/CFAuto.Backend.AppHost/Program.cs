@@ -8,17 +8,26 @@ var rabbitmq = builder.AddRabbitMQ("rabbitmq")
                       .WithLifetime(ContainerLifetime.Persistent)
                       .WithManagementPlugin();
 
-var worker = builder.AddProject<Projects.WorkerService1>("worker")
+var postgres = builder.AddPostgres("postgres")
+                      .WithPgAdmin();
+
+var postgresdb = postgres.AddDatabase("postgresdb");
+
+var reservationProccessor = builder.AddProject<Projects.ReservationProcessor>("reservationprocessor")
     .WithReference(rabbitmq)
-    .WaitFor(rabbitmq)
-    .WithReference(cache)
-    .WaitFor(cache);
+    .WaitFor(rabbitmq);
+
+var reservationSummery = builder.AddProject<Projects.ReservationSummery>("reservationsummery")
+    .WithReference(postgresdb)
+    .WaitFor(postgresdb)
+    .WithReference(rabbitmq)
+    .WaitFor(rabbitmq);
+
 
 builder.AddProject<Projects.Web>("web")
     .WithExternalHttpEndpoints()
     .WithReference(rabbitmq)
-    .WaitFor(rabbitmq)
-    .WithReference(worker);
+    .WaitFor(rabbitmq);
 
 // builder.AddProject<Projects.CFAuto_Backend_Web>("webfrontend")
 //     .WithExternalHttpEndpoints()
