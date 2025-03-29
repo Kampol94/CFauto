@@ -31,8 +31,13 @@ builder.Services.AddMassTransit(x =>
             return opts;
         });
     });
+});
 
-    //x.AddRequestClient<CheckReservationStatus>();
+// Add RequestClient for CheckReservationStatus
+builder.Services.AddScoped(sp =>
+{
+    var bus = sp.GetRequiredService<IBus>();
+    return bus.CreateRequestClient<CheckReservationStatus>();
 });
 
 var app = builder.Build();
@@ -57,3 +62,5 @@ app.Run();
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {
 }
+
+public partial class Program { }

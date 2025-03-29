@@ -31,7 +31,7 @@ builder.Services.AddMarten(options =>
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<CreateReservationJobConsumer>();
-    x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(true));
+    x.AddConsumer<CheckReservationStatusConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration.GetConnectionString("rabbitmq")!);

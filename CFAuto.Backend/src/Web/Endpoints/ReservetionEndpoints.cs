@@ -42,12 +42,6 @@ public static class ReservetionEndpoints
 
         var notFoundResponse = await notFound;
         return Results.NotFound(notFoundResponse.Message);
-        // return response switch
-        // {
-        //     (Response<ReservationStatus> reservationStatusResponse, _) => HandleSuccessResponse(reservationStatusResponse),
-        //     (_, Response<NotFound> errorResponse) => HandleErrorResponse(errorResponse),
-        //     _ => Results.StatusCode(StatusCodes.Status500InternalServerError)
-        // };
     }
 
     private static IResult HandleSuccessResponse(Response<ReservationStatusResponse> reservationStatusResponse)

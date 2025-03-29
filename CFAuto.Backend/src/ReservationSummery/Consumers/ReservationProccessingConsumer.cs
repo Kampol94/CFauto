@@ -33,3 +33,18 @@ public class CreateReservationJobConsumer(IDocumentSession documentSession) : IC
     }
 }
 
+public class CheckReservationStatusConsumer(IDocumentSession documentSession) : IConsumer<CheckReservationStatus>
+{
+    public async Task Consume(ConsumeContext<CheckReservationStatus> context)
+    {
+        var reservation = await documentSession.LoadAsync<Reservation>(context.Message.ReservationId);
+        if (reservation == null)
+        {
+            await context.RespondAsync(new NotFound());
+            return;
+        }
+
+        await context.RespondAsync(new ReservationStatus { CurrentState = reservation.Status.ToString() });
+    }
+}
+
